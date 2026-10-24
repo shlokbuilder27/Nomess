@@ -153,6 +153,18 @@ class HomeworkNukeApp {
   switchView(viewName) {
     this.currentView = viewName;
 
+    // Crossfade Dynamic Section Background Videos
+    const allVideos = document.querySelectorAll('.section-video');
+    allVideos.forEach((v) => {
+      v.classList.remove('active');
+      try { v.pause(); } catch (e) {}
+    });
+    const targetVideo = document.getElementById(`bg-video-${viewName}`);
+    if (targetVideo) {
+      targetVideo.classList.add('active');
+      try { targetVideo.play(); } catch (e) {}
+    }
+
     // Update active nav item
     document.querySelectorAll('.nav-item').forEach((item) => {
       if (item.getAttribute('data-view') === viewName) {

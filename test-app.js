@@ -32,8 +32,9 @@ assert(fs.existsSync(path.join(__dirname, 'src/renderer/scripts/app.js')), 'app.
 assert(fs.existsSync(path.join(__dirname, 'src/renderer/scripts/timer.js')), 'timer.js exists');
 assert(fs.existsSync(path.join(__dirname, 'src/renderer/scripts/audio.js')), 'audio.js exists');
 assert(fs.existsSync(path.join(__dirname, 'src/renderer/scripts/space-animation.js')), 'space-animation.js exists');
+assert(fs.existsSync(path.join(__dirname, 'src/renderer/scripts/three-space.js')), 'three-space.js exists');
 
-// 3. Check Assets
+// 3. Check Assets & Video Backgrounds
 assert(fs.existsSync(path.join(__dirname, 'assets/icons/app-icon.svg')), '2D Astronaut SVG icon exists');
 assert(fs.existsSync(path.join(__dirname, 'assets/icons/app-icon.png')), 'app-icon.png exists');
 assert(fs.existsSync(path.join(__dirname, 'assets/icons/tray-icon.png')), 'tray-icon.png exists');
@@ -42,6 +43,13 @@ assert(fs.existsSync(path.join(__dirname, 'assets/space/planet-1.svg')), 'planet
 assert(fs.existsSync(path.join(__dirname, 'assets/space/asteroid.svg')), 'asteroid.svg exists');
 assert(fs.existsSync(path.join(__dirname, 'assets/fonts/SpaceGrotesk-VariableFont_wght.ttf')), 'Space Grotesk font exists');
 assert(fs.existsSync(path.join(__dirname, 'assets/fonts/Cagliostro-Regular.ttf')), 'Cagliostro font exists');
+
+// Section Animated Videos (FFmpeg generated)
+assert(fs.existsSync(path.join(__dirname, 'assets/generated/missions_loop.mp4')), 'missions_loop.mp4 exists');
+assert(fs.existsSync(path.join(__dirname, 'assets/generated/schedule_loop.mp4')), 'schedule_loop.mp4 exists');
+assert(fs.existsSync(path.join(__dirname, 'assets/generated/timer_loop.mp4')), 'timer_loop.mp4 exists');
+assert(fs.existsSync(path.join(__dirname, 'assets/generated/ocr_loop.mp4')), 'ocr_loop.mp4 exists');
+assert(fs.existsSync(path.join(__dirname, 'assets/generated/stats_loop.mp4')), 'stats_loop.mp4 exists');
 
 // 4. Test Gemini Service Heuristic Scheduling
 const { GeminiService } = require('./dist/main/gemini-service');

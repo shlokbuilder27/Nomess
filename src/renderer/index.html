@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HomeworkNuke — Deep Space Sovereign Study</title>
   <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/space-bg.css">
   <link rel="stylesheet" href="styles/components.css">
   <link rel="stylesheet" href="styles/timer.css">
   <link rel="stylesheet" href="styles/animations.css">
@@ -20,9 +21,20 @@
 </head>
 <body>
 
+  <!-- Dynamic Section Background Animated Cartoon Videos -->
+  <div id="section-background-videos">
+    <video id="bg-video-tasks" class="section-video active" src="../../assets/generated/missions_loop.mp4" autoplay loop muted playsinline></video>
+    <video id="bg-video-schedule" class="section-video" src="../../assets/generated/schedule_loop.mp4" loop muted playsinline></video>
+    <video id="bg-video-timer" class="section-video" src="../../assets/generated/timer_loop.mp4" loop muted playsinline></video>
+    <video id="bg-video-ocr" class="section-video" src="../../assets/generated/ocr_loop.mp4" loop muted playsinline></video>
+    <video id="bg-video-stats" class="section-video" src="../../assets/generated/stats_loop.mp4" loop muted playsinline></video>
+    <video id="bg-video-settings" class="section-video" src="../../assets/generated/schedule_loop.mp4" loop muted playsinline></video>
+  </div>
+
   <!-- 3D Three.js WebGL Canvas (Planets, Floating Astronaut, Parallax Starfield) -->
   <canvas id="three-canvas"></canvas>
   <canvas id="confetti-canvas"></canvas>
+  <div class="film-grain"></div>
 
   <!-- Master App Shell -->
   <div id="app-container">
