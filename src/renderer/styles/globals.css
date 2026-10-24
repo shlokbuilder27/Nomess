@@ -1,0 +1,99 @@
+/* ==========================================================================
+   HOMEWORKNUKE — GLOBAL STYLES & ANTI-AI-SLOP DESIGN SYSTEM
+   Palette: Dark Moss (#2D312E), Golden Amber (#D4A373), Pale Sage (#E9EDC9),
+            Swiss Cream (#FEFAE0), Muted Slate (#CCD5AE)
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../../assets/fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cagliostro';
+  src: url('../../assets/fonts/Cagliostro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* Common Brand Accents */
+  --color-golden-amber: #D4A373;
+  --color-golden-amber-glow: rgba(212, 163, 115, 0.35);
+  --color-pale-sage: #E9EDC9;
+  --color-muted-slate: #CCD5AE;
+  --color-danger-nuke: #BC4749;
+
+  /* Dark Theme (Default) */
+  --bg-primary: #1C201E;
+  --bg-secondary: #252A27;
+  --bg-card: rgba(45, 49, 46, 0.78);
+  --bg-card-hover: rgba(55, 61, 57, 0.9);
+  --bg-input: #181B19;
+  --border-subtle: rgba(233, 237, 201, 0.12);
+  --border-active: #D4A373;
+  --text-primary: #FEFAE0;
+  --text-secondary: #CCD5AE;
+  --text-muted: #8F9A7B;
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  --backdrop-blur: blur(14px);
+  --active-tab-bg: rgba(212, 163, 115, 0.18);
+}
+
+[data-theme="light"] {
+  /* Light Theme — Swiss Cream Surface with Dark Moss Text */
+  --bg-primary: #FEFAE0;
+  --bg-secondary: #F3EFCB;
+  --bg-card: rgba(233, 237, 201, 0.85);
+  --bg-card-hover: #DDE2BC;
+  --bg-input: #FFFFFF;
+  --border-subtle: rgba(45, 49, 46, 0.18);
+  --border-active: #D4A373;
+  --text-primary: #2D312E;
+  --text-secondary: #4A504B;
+  --text-muted: #727C74;
+  --card-shadow: 0 8px 24px 0 rgba(45, 49, 46, 0.1);
+  --backdrop-blur: blur(10px);
+  --active-tab-bg: rgba(212, 163, 115, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Cagliostro', system-ui, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  user-select: none;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+h1, h2, h3, h4, .font-heading, .btn, .timer-digits, .badge, .logo-title {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 163, 115, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-golden-amber);
+}

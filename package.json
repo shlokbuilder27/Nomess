@@ -1,0 +1,29 @@
+{
+  "name": "homeworknuke",
+  "version": "1.0.0",
+  "description": "AI-Powered Homework Triage & Pomodoro Scheduler",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "build:main": "tsc -p tsconfig.json",
+    "build": "npm run build:main",
+    "start": "tsc -p tsconfig.json && electron .",
+    "dev": "tsc -p tsconfig.json && electron ."
+  },
+  "keywords": [
+    "homework",
+    "pomodoro",
+    "ai",
+    "gemini",
+    "electron"
+  ],
+  "author": "Shlok",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^2.31.0"
+  },
+  "devDependencies": {
+    "electron": "^34.2.0",
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.7"
+  }
+}

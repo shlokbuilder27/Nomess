@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" fill="none">
+  <defs>
+    <radialGradient id="rockGrad" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#E9EDC9"/>
+      <stop offset="35%" stop-color="#CCD5AE"/>
+      <stop offset="75%" stop-color="#8B9575"/>
+      <stop offset="100%" stop-color="#2D312E"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Irregular Asteroid Polygon -->
+  <polygon points="38,10 58,16 72,32 75,54 59,72 35,74 15,62 8,40 18,20" fill="url(#rockGrad)" stroke="#2D312E" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Pits & Craters -->
+  <circle cx="34" cy="30" r="5" fill="#2D312E" opacity="0.3"/>
+  <circle cx="52" cy="42" r="7" fill="#2D312E" opacity="0.3"/>
+  <circle cx="30" cy="54" r="4" fill="#2D312E" opacity="0.3"/>
+  <path d="M48 24 L54 28" stroke="#FEFAE0" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>

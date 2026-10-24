@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240" fill="none">
+  <!-- Astronaut Helmet and Visor -->
+  <defs>
+    <linearGradient id="visorGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E9EDC9"/>
+      <stop offset="50%" stop-color="#D4A373"/>
+      <stop offset="100%" stop-color="#9C6644"/>
+    </linearGradient>
+    <linearGradient id="suitSuit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEFAE0"/>
+      <stop offset="100%" stop-color="#CCD5AE"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Jetpack / Life Support Backpack -->
+  <rect x="55" y="70" width="90" height="100" rx="16" fill="#2D312E" stroke="#D4A373" stroke-width="3"/>
+  <rect x="68" y="85" width="24" height="60" rx="8" fill="#CCD5AE" opacity="0.6"/>
+  <rect x="108" y="85" width="24" height="60" rx="8" fill="#CCD5AE" opacity="0.6"/>
+  <!-- Thruster nozzles -->
+  <path d="M70 170 L65 185 L85 185 L80 170 Z" fill="#D4A373"/>
+  <path d="M120 170 L115 185 L135 185 L130 170 Z" fill="#D4A373"/>
+  <!-- Tiny thruster flame particles -->
+  <circle cx="75" cy="192" r="4" fill="#D4A373" opacity="0.8"/>
+  <circle cx="125" cy="192" r="4" fill="#D4A373" opacity="0.8"/>
+
+  <!-- Body Suit -->
+  <path d="M60 85 C60 70, 140 70, 140 85 C145 105, 145 140, 140 160 C125 165, 75 165, 60 160 Z" fill="url(#suitSuit)" stroke="#2D312E" stroke-width="4"/>
+
+  <!-- Chest Control Rig -->
+  <rect x="80" y="95" width="40" height="32" rx="6" fill="#2D312E"/>
+  <circle cx="90" cy="106" r="3" fill="#D4A373"/>
+  <circle cx="100" cy="106" r="3" fill="#E9EDC9"/>
+  <circle cx="110" cy="106" r="3" fill="#CCD5AE"/>
+  <rect x="86" y="115" width="28" height="4" rx="2" fill="#D4A373"/>
+
+  <!-- Left Arm -->
+  <path d="M62 88 C40 100, 30 125, 45 142 C50 148, 58 142, 54 135 C45 122, 50 106, 66 98 Z" fill="url(#suitSuit)" stroke="#2D312E" stroke-width="3.5"/>
+  <!-- Left Glove (Grasping pencil/stylus) -->
+  <ellipse cx="44" cy="144" rx="9" ry="8" fill="#2D312E"/>
+  <line x1="32" y1="150" x2="52" y2="135" stroke="#D4A373" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Right Arm waving -->
+  <path d="M138 88 C160 95, 172 110, 165 130 C162 138, 153 135, 154 127 C158 114, 150 104, 134 98 Z" fill="url(#suitSuit)" stroke="#2D312E" stroke-width="3.5"/>
+  <ellipse cx="166" cy="133" rx="9" ry="8" fill="#2D312E"/>
+
+  <!-- Left Leg -->
+  <path d="M72 160 C68 180, 64 200, 60 215 C60 222, 75 222, 78 215 C82 200, 85 180, 88 160 Z" fill="url(#suitSuit)" stroke="#2D312E" stroke-width="3.5"/>
+  <!-- Left Boot -->
+  <path d="M55 215 C55 210, 80 210, 80 215 L82 225 C82 228, 52 228, 52 225 Z" fill="#2D312E"/>
+  <rect x="52" y="222" width="30" height="4" rx="2" fill="#D4A373"/>
+
+  <!-- Right Leg -->
+  <path d="M128 160 C132 180, 136 200, 140 215 C140 222, 125 222, 122 215 C118 200, 115 180, 112 160 Z" fill="url(#suitSuit)" stroke="#2D312E" stroke-width="3.5"/>
+  <!-- Right Boot -->
+  <path d="M120 215 C120 210, 145 210, 145 215 L148 225 C148 228, 118 228, 118 225 Z" fill="#2D312E"/>
+  <rect x="118" y="222" width="30" height="4" rx="2" fill="#D4A373"/>
+
+  <!-- Helmet Outer -->
+  <circle cx="100" cy="54" r="38" fill="#FEFAE0" stroke="#2D312E" stroke-width="4"/>
+  <!-- Visor -->
+  <path d="M75 52 C75 36, 125 36, 125 52 C125 68, 75 68, 75 52 Z" fill="url(#visorGold)" stroke="#2D312E" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- Visor Reflection Flare -->
+  <path d="M85 45 C95 40, 110 40, 115 45" stroke="#FEFAE0" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <!-- Audio / Comms Antennas -->
+  <line x1="62" y1="50" x2="62" y2="35" stroke="#D4A373" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="62" cy="33" r="3.5" fill="#D4A373"/>
+</svg>

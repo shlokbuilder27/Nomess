@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" width="160" height="120" fill="none">
+  <defs>
+    <radialGradient id="planetGrad1" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FEFAE0"/>
+      <stop offset="45%" stop-color="#D4A373"/>
+      <stop offset="85%" stop-color="#9C6644"/>
+      <stop offset="100%" stop-color="#2D312E"/>
+    </radialGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E9EDC9" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#D4A373" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#CCD5AE" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Back of Ring -->
+  <path d="M10 60 C10 42, 150 42, 150 60" stroke="url(#ringGrad)" stroke-width="9" stroke-linecap="round" opacity="0.5"/>
+  <path d="M18 60 C18 46, 142 46, 142 60" stroke="#CCD5AE" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Planet Sphere -->
+  <circle cx="80" cy="60" r="36" fill="url(#planetGrad1)"/>
+  <!-- Planet Surface Bands -->
+  <path d="M50 52 C65 56, 95 56, 110 52" stroke="#E9EDC9" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+  <path d="M46 64 C65 69, 95 69, 114 64" stroke="#2D312E" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+  <path d="M54 74 C68 77, 92 77, 106 74" stroke="#D4A373" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+
+  <!-- Front of Ring -->
+  <path d="M10 60 C10 78, 150 78, 150 60" stroke="url(#ringGrad)" stroke-width="9" stroke-linecap="round"/>
+  <path d="M18 60 C18 74, 142 74, 142 60" stroke="#FEFAE0" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+</svg>

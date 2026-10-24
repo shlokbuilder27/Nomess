@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeworkNuke — Sovereign Study Control</title>
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/space-bg.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/timer.css">
+  <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+
+  <!-- Canvas Backgrounds & Ambient Grain -->
+  <canvas id="space-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+  <div class="film-grain"></div>
+
+  <!-- Cosmic Vector Elements -->
+  <img src="../../assets/space/planet-1.svg" class="cosmic-planet-1" alt="Planet" />
+  <img src="../../assets/space/asteroid.svg" class="cosmic-asteroid-1" alt="Asteroid" />
+
+  <!-- Floating 2D Space Astronaut -->
+  <div class="floating-astronaut-container" title="Sovereign Astronaut: Eyes on the Horizon" onclick="window.soundEngine.playSuccess()">
+    <img src="../../assets/space/astronaut.svg" alt="Astronaut" />
+  </div>
+
+  <!-- Master App Shell -->
+  <div id="app-container">
+
+    <!-- Frameless Window Custom Titlebar -->
+    <header id="titlebar">
+      <div class="titlebar-brand">
+        <img src="../../assets/icons/app-icon.svg" alt="HomeworkNuke" />
+        <span>HomeworkNuke</span>
+        <span style="font-size: 10px; color: var(--color-golden-amber); font-weight: 700; margin-left: 6px; border: 1px solid var(--color-golden-amber); padding: 1px 6px; border-radius: 4px;">v1.0</span>
+      </div>
+
+      <div class="titlebar-controls">
+        <button id="btn-toggle-theme" class="theme-toggle-btn">☀ SWISS CREAM</button>
+        <button id="win-min" class="win-btn" title="Minimize">─</button>
+        <button id="win-max" class="win-btn" title="Maximize">□</button>
+        <button id="win-close" class="win-btn close" title="Close (Minimizes to Tray)">✕</button>
+      </div>
+    </header>
+
+    <!-- Main Body: Sidebar + Dynamic Content -->
+    <div id="main-body">
+
+      <!-- Left Navigation Sidebar -->
+      <aside id="sidebar">
+        <div class="nav-group">
+          <div class="nav-label">Command Center</div>
+
+          <a href="#" class="nav-item active" data-view="tasks">
+            <div class="nav-item-left">
+              <span class="icon">📋</span>
+              <span>Missions</span>
+            </div>
+            <span id="nav-task-badge" class="nav-badge">0</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="schedule">
+            <div class="nav-item-left">
+              <span class="icon">📅</span>
+              <span>AI Strategic Schedule</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-view="timer">
+            <div class="nav-item-left">
+              <span class="icon">⏱</span>
+              <span>Sovereign Timer</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-view="ocr">
+            <div class="nav-item-left">
+              <span class="icon">📸</span>
+              <span>Vision OCR Snap</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-view="stats">
+            <div class="nav-item-left">
+              <span class="icon">📊</span>
+              <span>Stats Radar</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-view="settings">
+            <div class="nav-item-left">
+              <span class="icon">⚙</span>
+              <span>Settings</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- TACTICAL NUKE ACTION -->
+        <div class="nuke-btn-container">
+          <button id="btn-nuke-action" class="btn-nuke" title="Detonate: Eliminate all easy & low-hanging homework instantly">
+            <span>💣</span>
+            <span>NUKE EASY MISSIONS</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main id="content-area">
+
+        <!-- ==========================================
+             VIEW 1: MISSIONS / TASK QUEUE
+             ========================================== -->
+        <section id="view-tasks" class="view-panel" style="display: block;">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Homework Mission Queue</h1>
+              <p class="view-subtitle">High-focus homework triage. Pay the clerical toll rapidly; keep your sovereignty intact.</p>
+            </div>
+          </div>
+
+          <!-- Add Task Panel -->
+          <div class="task-form-panel">
+            <div class="form-row">
+              <input type="text" id="task-desc-input" class="input-field" placeholder="Assignment description (e.g. Maths Ex 4.2 Q1-15, Science Chapter 6 notes...)" />
+              <input type="number" id="task-mins-input" class="input-field" style="max-width: 130px;" placeholder="Est. Mins" value="30" min="5" max="180" />
+              <input type="date" id="task-deadline-input" class="input-field" style="max-width: 170px;" title="Deadline / Due Date" />
+              <button id="btn-add-task" class="btn-primary">
+                <span>➕</span>
+                <span>ADD MISSION</span>
+              </button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 14px;">
+              <!-- Subject chips -->
+              <div id="subject-chips" class="chip-group">
+                <span class="chip active" data-subject="Mathematics">Mathematics</span>
+                <span class="chip" data-subject="Science">Science</span>
+                <span class="chip" data-subject="English">English</span>
+                <span class="chip" data-subject="Gujarati">Gujarati</span>
+                <span class="chip" data-subject="Computer">Computer</span>
+                <span class="chip" data-subject="Social Science">Social Science</span>
+              </div>
+
+              <!-- Task type chips -->
+              <div id="type-chips" class="chip-group">
+                <span class="chip active" data-type="problem-solving">Problem-Solving</span>
+                <span class="chip" data-type="written">Written</span>
+                <span class="chip" data-type="memorization">Memorization</span>
+                <span class="chip" data-type="reading">Reading</span>
+              </div>
+
+              <!-- Priority toggle -->
+              <button id="btn-toggle-priority" class="chip" style="font-weight: 700; border-color: var(--color-golden-amber);">
+                ☆ NORMAL PRIORITY
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Task Cards List -->
+          <div id="task-list-container" class="task-grid">
+            <!-- Dynamic task cards injected via app.js -->
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             VIEW 2: AI STRATEGIC SCHEDULE
+             ========================================== -->
+        <section id="view-schedule" class="view-panel" style="display: none;">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>AI Strategic Study Blueprint</h1>
+              <p class="view-subtitle">Gemini cognitive sequencing. Alternating deep problem-solving with tactical breaks to kill friction.</p>
+            </div>
+            <button id="btn-generate-schedule" class="btn-primary" onclick="window.app.generateAISchedule()">
+              <span>⚡</span>
+              <span>CALCULATE BLUEPRINT</span>
+            </button>
+          </div>
+
+          <!-- AI Tactical Briefing Card -->
+          <div class="ai-briefing-card">
+            <div class="briefing-header">
+              <span>🚀</span>
+              <span id="schedule-summary-header">COGNITIVE BLUEPRINT READY</span>
+            </div>
+            <p id="ai-briefing-content" class="briefing-text">
+              Hit "Calculate Blueprint" above. Gemini will evaluate your pending homework, estimate optimal cognitive block lengths (e.g. 45 min for Maths, 20 min for revision), and sequence them with zero burnout.
+            </p>
+          </div>
+
+          <!-- Interactive Drag-and-Drop Timeline -->
+          <div id="schedule-blocks-container" class="schedule-timeline">
+            <!-- Blocks rendered dynamically -->
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             VIEW 3: SOVEREIGN POMODORO TIMER
+             ========================================== -->
+        <section id="view-timer" class="view-panel" style="display: none;">
+          <div class="view-header" style="justify-content: center; text-align: center;">
+            <div class="view-title-group">
+              <h1>Sovereign Focus Engine</h1>
+              <p class="view-subtitle">Action kills anxiety. Lock into the current block.</p>
+            </div>
+          </div>
+
+          <div class="timer-view-container">
+            <!-- Circular SVG Ring -->
+            <div id="timer-ring-wrapper" class="timer-ring-wrapper">
+              <svg class="timer-svg" viewBox="0 0 340 340">
+                <!-- Outer Track -->
+                <circle class="timer-track-circle" cx="170" cy="170" r="150" />
+                <!-- Progress Arc -->
+                <circle id="timer-progress-circle" class="timer-progress-circle" cx="170" cy="170" r="150" />
+              </svg>
+
+              <!-- Central Digits & Context -->
+              <div class="timer-center-content">
+                <div id="timer-status-badge" class="timer-status-badge">DEEP WORK FOCUS</div>
+                <div id="timer-digits" class="timer-digits">25:00</div>
+                <div id="timer-task-label" class="timer-task-label">Target: Unspecified Focus</div>
+              </div>
+            </div>
+
+            <!-- Timer Action Buttons -->
+            <div class="timer-controls">
+              <button id="btn-timer-reset" class="btn-timer-secondary" title="Reset Session">↺</button>
+              <button id="btn-timer-play-pause" class="btn-timer-primary" title="Start / Pause (Spacebar)">▶</button>
+              <button id="btn-timer-skip" class="btn-timer-secondary" title="Skip to Next Break/Work">⏭</button>
+            </div>
+
+            <!-- Quick Duration Presets -->
+            <div class="timer-presets">
+              <button class="chip" onclick="window.timer.setDuration(25, 'work')">25m Sprint</button>
+              <button class="chip" onclick="window.timer.setDuration(45, 'work')">45m Deep Work</button>
+              <button class="chip" onclick="window.timer.setDuration(70, 'work')">70m Golden Dawn</button>
+              <button class="chip" onclick="window.timer.setDuration(5, 'short-break')">5m Rest</button>
+              <button class="chip" onclick="window.timer.setDuration(15, 'long-break')">15m Recharge</button>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             VIEW 4: VISION OCR SNAP
+             ========================================== -->
+        <section id="view-ocr" class="view-panel" style="display: none;">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Vision OCR — Snap Homework</h1>
+              <p class="view-subtitle">Drop a photo of handwritten homework, school diary, or portion sheet. Gemini Vision parses it into structured tasks.</p>
+            </div>
+          </div>
+
+          <div class="task-form-panel" style="text-align: center; padding: 36px 24px;">
+            <div id="ocr-dropzone" style="border: 2px dashed var(--border-subtle); border-radius: 16px; padding: 40px 20px; cursor: pointer; transition: all 0.25s ease;">
+              <input type="file" id="ocr-file-input" accept="image/*" style="display: none;" />
+              
+              <div id="ocr-dropzone-prompt">
+                <div style="font-size: 48px; margin-bottom: 14px;">📸</div>
+                <h3 style="font-size: 18px; margin-bottom: 8px; color: var(--text-primary);">Click or Drag Homework Photo Here</h3>
+                <p style="font-size: 13px; color: var(--text-muted); max-width: 440px; margin: 0 auto;">Supports handwritten notes, textbook exercise photos, WhatsApp assignment screenshots, and syllabus sheets.</p>
+              </div>
+
+              <div id="ocr-preview-container" style="display: none;">
+                <img id="ocr-preview-img" style="max-height: 280px; max-width: 100%; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--color-golden-amber);" alt="Preview" />
+                <div>
+                  <button id="btn-run-ocr" class="btn-primary" style="padding: 12px 28px;">
+                    <span>🔍</span>
+                    <span>EXTRACT MISSIONS</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             VIEW 5: STATS RADAR
+             ========================================== -->
+        <section id="view-stats" class="view-panel" style="display: none;">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Daily Productivity Radar</h1>
+              <p class="view-subtitle">Tangible telemetry of homework eliminated and cognitive focus logged.</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="stat-streak">1 DAYS</div>
+              <div class="stat-label">🔥 Consecutive Sovereign Streak</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number" id="stat-tasks-done">0</div>
+              <div class="stat-label">✅ Missions Completed Today</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number" id="stat-tasks-nuked">0</div>
+              <div class="stat-label">💣 Missions Nuked Rapidly</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number" id="stat-minutes">0m</div>
+              <div class="stat-label">⏱ Total Deep Focus Minutes</div>
+            </div>
+          </div>
+
+          <div class="task-form-panel">
+            <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--color-golden-amber);">Operating Creed & Ground Truth</h3>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 10px;">
+              "Action Kills Anxiety. Thinking about homework causes dread; sitting down with a focused timer destroys it. School homework is not a test of my soul; it is a clerical toll to be paid quickly and mechanically."
+            </p>
+            <div style="font-size: 12px; color: var(--text-muted); font-weight: 600;">— Shlok // Master Identity Protocol</div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             VIEW 6: SETTINGS
+             ========================================== -->
+        <section id="view-settings" class="view-panel" style="display: none;">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>System Settings</h1>
+              <p class="view-subtitle">Configure Gemini AI integration, audio feedback, and local telemetry.</p>
+            </div>
+          </div>
+
+          <div class="task-form-panel">
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">
+                GEMINI API KEY (Free Tier)
+              </label>
+              <div style="display: flex; gap: 12px;">
+                <input type="password" id="setting-api-key" class="input-field" placeholder="Enter your Gemini API key (AIzaSy...)" />
+                <button id="btn-save-settings" class="btn-primary">SAVE SETTINGS</button>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+                Used for Gemini 2.0 Flash scheduling and multimodal camera OCR. Stored locally in encrypted local storage.
+              </p>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 18px; display: flex; flex-direction: column; gap: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">Audio Synthesizer</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">Play tactical chimes on timer completion and nuke blast</div>
+                </div>
+                <input type="checkbox" id="setting-audio-toggle" checked style="accent-color: var(--color-golden-amber); width: 18px; height: 18px;" onchange="window.soundEngine.enabled = this.checked;" />
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">Minimize to System Tray</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">Closing or minimizing keeps the app running in the Windows tray</div>
+                </div>
+                <input type="checkbox" id="setting-tray-toggle" checked style="accent-color: var(--color-golden-amber); width: 18px; height: 18px;" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="scripts/audio.js"></script>
+  <script src="scripts/space-animation.js"></script>
+  <script src="scripts/timer.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

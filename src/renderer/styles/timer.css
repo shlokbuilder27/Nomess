@@ -1,0 +1,169 @@
+/* ==========================================================================
+   SOVEREIGN POMODORO TIMER STYLES
+   SVG Circular Ring + Space Grotesk Digits + Relativistic Aura
+   ========================================================================== */
+
+.timer-view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.timer-ring-wrapper {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.timer-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Start at 12 o'clock */
+}
+
+/* Background track */
+.timer-track-circle {
+  fill: none;
+  stroke: rgba(204, 213, 174, 0.14);
+  stroke-width: 12;
+}
+
+/* Animated countdown progress ring */
+.timer-progress-circle {
+  fill: none;
+  stroke: var(--color-golden-amber);
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 942.48; /* 2 * PI * 150 */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.4s ease;
+  filter: drop-shadow(0 0 12px var(--color-golden-amber-glow));
+}
+
+/* Break mode styling: shift from golden amber to pale sage / muted slate */
+.timer-ring-wrapper.break-mode .timer-progress-circle {
+  stroke: var(--color-muted-slate);
+  filter: drop-shadow(0 0 12px rgba(204, 213, 174, 0.4));
+}
+
+/* Timer Center Display */
+.timer-center-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.timer-status-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(212, 163, 115, 0.18);
+  color: var(--color-golden-amber);
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.timer-ring-wrapper.break-mode .timer-status-badge {
+  background: rgba(204, 213, 174, 0.2);
+  color: var(--color-muted-slate);
+}
+
+.timer-digits {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 68px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.timer-task-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Controls Bar */
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.btn-timer-primary {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-golden-amber);
+  color: #1C201E;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px var(--color-golden-amber-glow);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-timer-primary:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+.btn-timer-primary:active {
+  transform: scale(0.96);
+}
+
+.btn-timer-secondary {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-timer-secondary:hover {
+  border-color: var(--color-golden-amber);
+  color: var(--color-golden-amber);
+  background: rgba(212, 163, 115, 0.12);
+}
+
+/* Quick Session Select Chips */
+.timer-presets {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
