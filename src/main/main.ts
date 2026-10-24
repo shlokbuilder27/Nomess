@@ -19,7 +19,7 @@ function createWindow(): void {
     minHeight: 650,
     frame: false, // Frameless custom title bar as requested!
     titleBarStyle: 'hidden',
-    backgroundColor: settings.theme === 'dark' ? '#2D312E' : '#FEFAE0',
+    backgroundColor: '#060911',
     icon: path.join(__dirname, '../../assets/icons/app-icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

@@ -1,4 +1,4 @@
-// HomeworkNuke Main Controller
+// HomeworkNuke Main Controller — Deep Space Blue & Minimalist Architecture
 class HomeworkNukeApp {
   constructor() {
     this.tasks = [];
@@ -7,22 +7,25 @@ class HomeworkNukeApp {
     this.selectedSubject = 'Mathematics';
     this.selectedTaskType = 'problem-solving';
     this.selectedPriority = 0;
+    this.currentFidelity = 'full'; // 'full' | 'minimal' | 'off'
 
     this.init();
   }
 
   async init() {
-    this.initTheme();
     this.initWindowControls();
     this.initNavigation();
-    this.initTaskForm();
+    this.initMinimalTaskBar();
+    this.initToggleControls();
     this.initNukeButton();
     this.initKeyboardShortcuts();
     this.initOCR();
     this.initSettings();
 
-    // Start background space animation and confetti
-    window.spaceBg = new window.SpaceAnimation('space-canvas');
+    // Start 3D Space Cosmos Engine & Confetti
+    if (window.ThreeSpaceEngine) {
+      window.space3D = new window.ThreeSpaceEngine('three-canvas');
+    }
     window.confetti = new window.ConfettiEngine('confetti-canvas');
     window.timer = new window.PomodoroTimer();
 
@@ -34,41 +37,13 @@ class HomeworkNukeApp {
     if (window.electronAPI) {
       window.electronAPI.onShortcutQuickAdd(() => {
         this.switchView('tasks');
-        const input = document.getElementById('task-desc-input');
+        const input = document.getElementById('minimal-task-desc');
         if (input) input.focus();
       });
       window.electronAPI.onShortcutToggleTimer(() => {
         this.switchView('timer');
         window.timer.toggle();
       });
-    }
-  }
-
-  initTheme() {
-    const savedTheme = localStorage.getItem('homeworknuke_theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    this.updateThemeButton(savedTheme);
-
-    const toggleBtn = document.getElementById('btn-toggle-theme');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        window.soundEngine.playClick();
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('homeworknuke_theme', next);
-        this.updateThemeButton(next);
-        if (window.electronAPI) {
-          window.electronAPI.saveSettings({ theme: next });
-        }
-      });
-    }
-  }
-
-  updateThemeButton(theme) {
-    const toggleBtn = document.getElementById('btn-toggle-theme');
-    if (toggleBtn) {
-      toggleBtn.innerHTML = theme === 'dark' ? '☀ SWISS CREAM' : '🌙 DARK MOSS';
     }
   }
 
@@ -87,11 +62,92 @@ class HomeworkNukeApp {
     navItems.forEach((item) => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
-        window.soundEngine.playClick();
+        window.soundEngine.playWarp();
         const viewName = item.getAttribute('data-view');
         this.switchView(viewName);
       });
     });
+
+    const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
+    if (btnToggleSidebar) {
+      btnToggleSidebar.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        this.toggleSidebar();
+      });
+    }
+  }
+
+  toggleSidebar() {
+    const container = document.getElementById('app-container');
+    container.classList.toggle('zen-mode');
+    const btnZen = document.getElementById('btn-toggle-zen');
+    if (btnZen) {
+      btnZen.classList.toggle('active', container.classList.contains('zen-mode'));
+    }
+  }
+
+  initToggleControls() {
+    // 1. Zen Mode Toggle
+    const btnZen = document.getElementById('btn-toggle-zen');
+    if (btnZen) {
+      btnZen.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        this.toggleSidebar();
+      });
+    }
+
+    // 2. 3D Space Cosmos Fidelity Toggle
+    const btn3D = document.getElementById('btn-toggle-3d');
+    if (btn3D) {
+      btn3D.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        if (this.currentFidelity === 'full') {
+          this.currentFidelity = 'minimal';
+          btn3D.textContent = '✨ STARS';
+        } else if (this.currentFidelity === 'minimal') {
+          this.currentFidelity = 'off';
+          btn3D.textContent = '🌑 VOID';
+          btn3D.classList.remove('active');
+        } else {
+          this.currentFidelity = 'full';
+          btn3D.textContent = '🪐 3D COSMOS';
+          btn3D.classList.add('active');
+        }
+
+        if (window.space3D) {
+          window.space3D.setFidelity(this.currentFidelity);
+        }
+      });
+    }
+
+    // 3. Space Ambient Drone Toggle
+    const btnAudio = document.getElementById('btn-toggle-drone');
+    if (btnAudio) {
+      btnAudio.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        const isRunning = window.soundEngine.toggleAmbientDrone();
+        if (isRunning) {
+          btnAudio.classList.add('active');
+          btnAudio.textContent = '🔊 AMBIENT';
+          this.showToast('Celestial Space Drone Activated (432Hz)');
+        } else {
+          btnAudio.classList.remove('active');
+          btnAudio.textContent = '🔇 MUTED';
+        }
+      });
+    }
+
+    // 4. Drawer Toggle for Subject Chips
+    const btnDrawer = document.getElementById('btn-toggle-drawer');
+    const drawer = document.getElementById('chips-drawer');
+    if (btnDrawer && drawer) {
+      btnDrawer.addEventListener('click', () => {
+        window.soundEngine.playClick();
+        const isHidden = drawer.style.display === 'none';
+        drawer.style.display = isHidden ? 'flex' : 'none';
+        btnDrawer.classList.toggle('active', isHidden);
+      });
+    }
   }
 
   switchView(viewName) {
@@ -121,7 +177,7 @@ class HomeworkNukeApp {
     }
   }
 
-  initTaskForm() {
+  initMinimalTaskBar() {
     // Subject chips
     const subjectChips = document.querySelectorAll('#subject-chips .chip');
     subjectChips.forEach((chip) => {
@@ -130,6 +186,8 @@ class HomeworkNukeApp {
         subjectChips.forEach((c) => c.classList.remove('active'));
         chip.classList.add('active');
         this.selectedSubject = chip.getAttribute('data-subject');
+        const badge = document.getElementById('current-subject-badge');
+        if (badge) badge.textContent = this.selectedSubject;
       });
     });
 
@@ -150,21 +208,14 @@ class HomeworkNukeApp {
       btnPriority.addEventListener('click', () => {
         window.soundEngine.playClick();
         this.selectedPriority = this.selectedPriority === 0 ? 1 : 0;
-        if (this.selectedPriority === 1) {
-          btnPriority.classList.add('active');
-          btnPriority.textContent = '★ HIGH PRIORITY';
-        } else {
-          btnPriority.classList.remove('active');
-          btnPriority.textContent = '☆ NORMAL PRIORITY';
-        }
+        btnPriority.classList.toggle('active', this.selectedPriority === 1);
+        btnPriority.textContent = this.selectedPriority === 1 ? '★ HIGH' : '☆ NORMAL';
       });
     }
 
     // Add Task Button
-    const btnAdd = document.getElementById('btn-add-task');
-    const inputDesc = document.getElementById('task-desc-input');
-    const inputMins = document.getElementById('task-mins-input');
-    const inputDeadline = document.getElementById('task-deadline-input');
+    const btnAdd = document.getElementById('btn-minimal-add');
+    const inputDesc = document.getElementById('minimal-task-desc');
 
     const handleAddTask = async () => {
       const desc = inputDesc.value.trim();
@@ -174,15 +225,12 @@ class HomeworkNukeApp {
       }
 
       window.soundEngine.playSuccess();
-      const est = parseInt(inputMins.value) || 25;
-
       const payload = {
         subject: this.selectedSubject,
         description: desc,
         taskType: this.selectedTaskType,
-        estMinutes: est,
+        estMinutes: 30,
         priority: this.selectedPriority,
-        deadline: inputDeadline.value || undefined,
       };
 
       await window.electronAPI.addTask(payload);
@@ -207,9 +255,9 @@ class HomeworkNukeApp {
   updateTaskBadges() {
     const pendingCount = this.tasks.filter((t) => t.status === 'pending' || t.status === 'in-progress').length;
     const badge = document.getElementById('nav-task-badge');
-    if (badge) {
-      badge.textContent = pendingCount;
-    }
+    if (badge) badge.textContent = pendingCount;
+    const centerCount = document.getElementById('titlebar-task-count');
+    if (centerCount) centerCount.textContent = `${pendingCount} ACTIVE`;
   }
 
   renderTaskList() {
@@ -219,9 +267,9 @@ class HomeworkNukeApp {
     if (this.tasks.length === 0) {
       container.innerHTML = `
         <div style="text-align: center; padding: 48px 16px; color: var(--text-muted);">
-          <div style="font-size: 40px; margin-bottom: 12px;">🛸</div>
-          <h3 style="font-size: 18px; margin-bottom: 6px; color: var(--text-primary);">Mission Queue Clear</h3>
-          <p style="font-size: 14px;">No homework assignments found. Add your tasks above or snap a syllabus photo!</p>
+          <div style="font-size: 36px; margin-bottom: 10px;">🛸</div>
+          <h3 style="font-size: 16px; margin-bottom: 4px; color: var(--text-primary);">Orbit Clear</h3>
+          <p style="font-size: 13px;">No active homework missions. Add your assignment above or drop a photo.</p>
         </div>
       `;
       return;
@@ -243,23 +291,22 @@ class HomeworkNukeApp {
             <div style="display: flex; align-items: center; gap: 6px;">
               <span class="task-subject-tag">${task.subject}</span>
               <span class="task-title">${task.description}</span>
-              ${task.priority === 1 ? '<span style="color: var(--color-golden-amber); font-weight: bold; font-size: 12px;">★</span>' : ''}
+              ${task.priority === 1 ? '<span style="color: var(--accent-solar); font-size: 12px;">★</span>' : ''}
             </div>
             <div class="task-meta">
-              <span>⏱ ${task.estMinutes} mins</span>
+              <span>⏱ ${task.estMinutes}m</span>
               <span>🏷 ${task.taskType}</span>
-              ${task.deadline ? `<span>📅 Due: ${task.deadline}</span>` : ''}
-              ${task.status === 'nuked' ? '<span style="color: var(--color-danger-nuke); font-weight: 700;">[NUKED 💣]</span>' : ''}
+              ${task.status === 'nuked' ? '<span style="color: var(--accent-nuke); font-weight: 700;">[NUKED 💣]</span>' : ''}
             </div>
           </div>
         </div>
         <div class="task-actions">
-          <button class="btn-icon btn-start-timer" title="Load into Pomodoro Timer">⏱</button>
-          <button class="btn-icon danger btn-delete-task" title="Delete Task">🗑</button>
+          <button class="btn-icon btn-start-timer" title="Focus in Timer">⏱</button>
+          <button class="btn-icon danger btn-delete-task" title="Eliminate">🗑</button>
         </div>
       `;
 
-      // Checkbox complete toggle
+      // Complete toggle
       const checkCircle = card.querySelector('.task-check-circle');
       checkCircle.addEventListener('click', async () => {
         window.soundEngine.playSuccess();
@@ -274,7 +321,7 @@ class HomeworkNukeApp {
       // Load into Timer
       const btnTimer = card.querySelector('.btn-start-timer');
       btnTimer.addEventListener('click', () => {
-        window.soundEngine.playClick();
+        window.soundEngine.playWarp();
         window.timer.setDuration(task.estMinutes, 'work', task);
         this.switchView('timer');
       });
@@ -296,27 +343,19 @@ class HomeworkNukeApp {
     if (!btnNuke) return;
 
     btnNuke.addEventListener('click', async () => {
-      // Audio Blast
       window.soundEngine.playNukeExplosion();
 
-      // Screen Shockwave
       const appContainer = document.getElementById('app-container');
       appContainer.classList.add('shake-nuke');
       setTimeout(() => appContainer.classList.remove('shake-nuke'), 700);
 
-      // Massive Multi-Stage Confetti Explosion
       window.confetti.burst(window.innerWidth * 0.3, window.innerHeight * 0.5, 90);
       window.confetti.burst(window.innerWidth * 0.7, window.innerHeight * 0.5, 90);
-      setTimeout(() => {
-        window.confetti.burst(window.innerWidth * 0.5, window.innerHeight * 0.3, 120);
-      }, 150);
 
-      // Execute Nuke on Backend
       const result = await window.electronAPI.nukeTasks('easy');
       await this.refreshTasks();
       await this.refreshStats();
 
-      // Notification feedback
       this.showToast(`💣 NUKE DETONATED: ${result.nukedCount} easy missions eliminated!`);
     });
   }
@@ -327,15 +366,16 @@ class HomeworkNukeApp {
     toast.style.bottom = '28px';
     toast.style.left = '50%';
     toast.style.transform = 'translateX(-50%)';
-    toast.style.background = 'var(--bg-secondary)';
-    toast.style.border = '1px solid var(--color-golden-amber)';
+    toast.style.background = 'rgba(15, 23, 42, 0.9)';
+    toast.style.border = '1px solid var(--accent-cyan)';
     toast.style.color = 'var(--text-primary)';
-    toast.style.padding = '12px 24px';
-    toast.style.borderRadius = '24px';
+    toast.style.padding = '10px 20px';
+    toast.style.borderRadius = '20px';
     toast.style.fontFamily = 'Space Grotesk, sans-serif';
-    toast.style.fontSize = '14px';
+    toast.style.fontSize = '13px';
     toast.style.fontWeight = '600';
-    toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+    toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.6)';
+    toast.style.backdropFilter = 'blur(10px)';
     toast.style.zIndex = '9999';
     toast.textContent = message;
 
@@ -345,24 +385,24 @@ class HomeworkNukeApp {
       toast.style.opacity = '0';
       toast.style.transform = 'translateX(-50%) translateY(10px)';
       setTimeout(() => toast.remove(), 400);
-    }, 2800);
+    }, 2600);
   }
 
   async generateAISchedule() {
     const btnGen = document.getElementById('btn-generate-schedule');
     if (btnGen) {
-      btnGen.innerHTML = '⚡ CALCULATING TRAJECTORY...';
+      btnGen.innerHTML = '⚡ CALCULATING...';
       btnGen.style.opacity = '0.7';
     }
 
     try {
-      window.soundEngine.playClick();
+      window.soundEngine.playWarp();
       const response = await window.electronAPI.generateSchedule(this.tasks);
       this.currentSchedule = response;
       this.renderScheduleView();
     } catch (err) {
       console.error(err);
-      this.showToast('Schedule calculation error: ' + err.message);
+      this.showToast('Schedule error: ' + err.message);
     } finally {
       if (btnGen) {
         btnGen.innerHTML = '⚡ REGENERATE BLUEPRINT';
@@ -378,71 +418,39 @@ class HomeworkNukeApp {
 
     if (!this.currentSchedule || !container) return;
 
-    if (briefingText) {
-      briefingText.textContent = this.currentSchedule.aiBriefing;
-    }
+    if (briefingText) briefingText.textContent = this.currentSchedule.aiBriefing;
     if (summaryHeader) {
-      summaryHeader.textContent = `${this.currentSchedule.summary} (Total Work: ${this.currentSchedule.totalWorkMinutes}m | Rest: ${this.currentSchedule.totalBreakMinutes}m)`;
+      summaryHeader.textContent = `${this.currentSchedule.summary} (${this.currentSchedule.totalWorkMinutes}m work | ${this.currentSchedule.totalBreakMinutes}m rest)`;
     }
 
     container.innerHTML = '';
     this.currentSchedule.schedule.forEach((block, index) => {
       const isBreak = block.blockType !== 'work';
       const el = document.createElement('div');
-      el.className = `timeline-block ${isBreak ? 'break-block' : ''}`;
-      el.setAttribute('draggable', 'true');
-      el.setAttribute('data-index', index);
+      el.className = `task-card ${isBreak ? 'break-card' : ''}`;
+      el.style.borderStyle = isBreak ? 'dashed' : 'solid';
 
       el.innerHTML = `
-        <div class="block-left">
+        <div class="task-left">
           <span style="font-size: 16px;">${isBreak ? '☕' : '🎯'}</span>
           <div>
             <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">${block.title}</div>
-            <div style="font-size: 12px; color: var(--text-muted);">${block.rationale || (isBreak ? 'Rest state' : 'Target assignment')}</div>
+            <div style="font-size: 11px; color: var(--text-muted);">${block.rationale || (isBreak ? 'Rest state' : 'Target block')}</div>
           </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span class="block-duration-badge">${block.durationMinutes} MIN</span>
-          <button class="btn-primary" style="padding: 6px 14px; font-size: 11px;">LOAD IN TIMER</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="task-subject-tag">${block.durationMinutes}M</span>
+          <button class="btn-icon" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); font-weight: 700; font-size: 11px; padding: 5px 10px;">LOAD</button>
         </div>
       `;
 
-      // Load block in timer
-      const btnLoad = el.querySelector('button');
-      btnLoad.addEventListener('click', () => {
-        window.soundEngine.playClick();
+      el.querySelector('button').addEventListener('click', () => {
+        window.soundEngine.playWarp();
         window.timer.setDuration(block.durationMinutes, block.blockType, {
           subject: block.subject,
           description: block.title,
         });
         this.switchView('timer');
-      });
-
-      // Drag and drop reordering
-      el.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('text/plain', index);
-        el.style.opacity = '0.5';
-      });
-      el.addEventListener('dragend', () => {
-        el.style.opacity = '1';
-      });
-      el.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        el.style.borderColor = 'var(--color-golden-amber)';
-      });
-      el.addEventListener('dragleave', () => {
-        el.style.borderColor = 'var(--border-subtle)';
-      });
-      el.addEventListener('drop', (e) => {
-        e.preventDefault();
-        el.style.borderColor = 'var(--border-subtle)';
-        const fromIdx = parseInt(e.dataTransfer.getData('text/plain'));
-        const toIdx = index;
-        if (fromIdx !== toIdx) {
-          const item = this.currentSchedule.schedule.splice(fromIdx, 1)[0];
-          this.currentSchedule.schedule.splice(toIdx, 0, item);
-          this.renderScheduleView();
-        }
       });
 
       container.appendChild(el);
@@ -465,8 +473,6 @@ class HomeworkNukeApp {
   initOCR() {
     const dropzone = document.getElementById('ocr-dropzone');
     const fileInput = document.getElementById('ocr-file-input');
-    const previewContainer = document.getElementById('ocr-preview-container');
-    const previewImg = document.getElementById('ocr-preview-img');
     const btnScan = document.getElementById('btn-run-ocr');
     let currentBase64 = null;
 
@@ -475,7 +481,7 @@ class HomeworkNukeApp {
     dropzone.addEventListener('click', () => fileInput.click());
     dropzone.addEventListener('dragover', (e) => {
       e.preventDefault();
-      dropzone.style.borderColor = 'var(--color-golden-amber)';
+      dropzone.style.borderColor = 'var(--accent-cyan)';
     });
     dropzone.addEventListener('dragleave', () => {
       dropzone.style.borderColor = 'var(--border-subtle)';
@@ -498,7 +504,7 @@ class HomeworkNukeApp {
       btnScan.addEventListener('click', async () => {
         if (!currentBase64) return;
         window.soundEngine.playClick();
-        btnScan.innerHTML = '🔍 GEMINI VISION ANALYZING...';
+        btnScan.innerHTML = '🔍 GEMINI ANALYZING...';
         btnScan.disabled = true;
 
         try {
@@ -507,11 +513,11 @@ class HomeworkNukeApp {
             await window.electronAPI.addMultipleTasks(tasks);
             window.soundEngine.playSuccess();
             window.confetti.burst(window.innerWidth / 2, window.innerHeight / 2, 70);
-            this.showToast(`✨ Extracted ${tasks.length} homework assignments from photo!`);
+            this.showToast(`✨ Extracted ${tasks.length} missions!`);
             await this.refreshTasks();
             this.switchView('tasks');
           } else {
-            this.showToast('No clear homework tasks identified in image.');
+            this.showToast('No tasks detected.');
           }
         } catch (err) {
           console.error(err);
@@ -557,24 +563,29 @@ class HomeworkNukeApp {
         window.soundEngine.playSuccess();
         const key = inputApiKey.value.trim();
         await window.electronAPI.saveSettings({ geminiApiKey: key });
-        this.showToast('⚙ Settings saved successfully!');
+        this.showToast('⚙ Settings saved.');
       });
     }
   }
 
   initKeyboardShortcuts() {
     window.addEventListener('keydown', (e) => {
-      // If typing in input or textarea, don't trigger global timer shortcuts
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
       if (e.code === 'Space') {
         e.preventDefault();
         window.timer.toggle();
-      } else if (e.code === 'KeyN' && e.ctrlKey) {
+      } else if (e.code === 'KeyZ') {
         e.preventDefault();
-        this.switchView('tasks');
-        const desc = document.getElementById('task-desc-input');
-        if (desc) desc.focus();
+        this.toggleSidebar();
+      } else if (e.code === 'KeyM') {
+        e.preventDefault();
+        const btn = document.getElementById('btn-toggle-drone');
+        if (btn) btn.click();
+      } else if (e.code === 'KeyB') {
+        e.preventDefault();
+        const btn = document.getElementById('btn-toggle-3d');
+        if (btn) btn.click();
       }
     });
   }

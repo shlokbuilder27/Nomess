@@ -19,11 +19,13 @@
   "author": "Shlok",
   "license": "MIT",
   "dependencies": {
-    "@google/genai": "^2.31.0"
+    "@google/genai": "^2.31.0",
+    "@types/three": "^0.186.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
+    "@types/node": "^22.10.7",
     "electron": "^34.2.0",
-    "typescript": "^5.7.3",
-    "@types/node": "^22.10.7"
+    "typescript": "^5.7.3"
   }
 }
