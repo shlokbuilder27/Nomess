@@ -1,4 +1,6 @@
 import type { NoteTemplate, VaultConfig } from '../types/note';
+import { CognitiveEngine } from './cognitiveEngine';
+import { ImageOcrService, type OCRProgressCallback } from './imageOcrService';
 
 export interface AIResponse {
   title: string;
@@ -16,28 +18,45 @@ export class AIService {
     rawText: string,
     template: NoteTemplate,
     config: VaultConfig,
-    imageBase64?: string
+    imageBase64?: string,
+    onProgress?: OCRProgressCallback
   ): Promise<AIResponse> {
-    // 1. Try Gemini if configured
+    let effectiveText = rawText;
+
+    // 1. If image is provided and no Gemini key is active:
+    // Execute on-device Canvas Wasm OCR (Idea 3)
+    if (imageBase64 && (!config.geminiApiKey?.trim() || config.aiProvider === 'pure-engineering')) {
+      try {
+        const ocrText = await ImageOcrService.extractTextFromImage(imageBase64, onProgress);
+        effectiveText = ocrText ? `${rawText}\n${ocrText}`.trim() : rawText;
+      } catch (ocrErr) {
+        console.warn('On-device OCR fallback note:', ocrErr);
+      }
+    }
+
+    // 2. Try Gemini Cloud if configured
     if (config.aiProvider === 'gemini' && config.geminiApiKey?.trim()) {
       try {
-        return await this.callGemini(rawText, template, config.geminiApiKey.trim(), imageBase64);
+        onProgress?.('Synthesizing with Gemini Flash...', 0.7);
+        return await this.callGemini(effectiveText, template, config.geminiApiKey.trim(), imageBase64);
       } catch (err) {
-        console.warn('Gemini API call failed, falling back to local heuristic:', err);
+        console.warn('Gemini API call failed, falling back to Pure-Engineering Engine:', err);
       }
     }
 
-    // 2. Try Ollama if configured
+    // 3. Try Ollama if configured
     if (config.aiProvider === 'ollama' && config.ollamaEndpoint) {
       try {
-        return await this.callOllama(rawText, template, config.ollamaEndpoint, config.ollamaModel);
+        onProgress?.('Synthesizing with local Ollama...', 0.7);
+        return await this.callOllama(effectiveText, template, config.ollamaEndpoint, config.ollamaModel);
       } catch (err) {
-        console.warn('Ollama call failed, falling back to local heuristic:', err);
+        console.warn('Ollama call failed, falling back to Pure-Engineering Engine:', err);
       }
     }
 
-    // 3. First-principles offline heuristic transformation
-    return this.heuristicStructure(rawText, template);
+    // 4. Default: First-principles Cognitive AST Synthesizer (Idea 1 - Pure Engineering)
+    onProgress?.('Synthesizing with Pure-Engineering Cognitive Engine...', 0.9);
+    return CognitiveEngine.synthesize(effectiveText, template);
   }
 
   /**
@@ -69,7 +88,6 @@ ${rawText || '(Notes captured in attached image)'}`;
     const parts: unknown[] = [{ text: userPrompt }];
 
     if (imageBase64) {
-      // Remove data URL prefix if present
       const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z]+;base64,/, '');
       parts.unshift({
         inline_data: {
@@ -91,7 +109,6 @@ ${rawText || '(Notes captured in attached image)'}`;
       }
     };
 
-    // Use Gemini 1.5/2.0 Flash for maximum speed and lowest token cost
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
@@ -172,32 +189,6 @@ ${rawText}`;
       tags: parsed.tags || ['local-ai'],
       tokensUsed: json.eval_count || 0,
       providerUsed: `Ollama (${modelName})`
-    };
-  }
-
-  /**
-   * First-principles offline heuristic restructuring when no AI is configured or user is offline
-   */
-  static heuristicStructure(rawText: string, template: NoteTemplate): AIResponse {
-    const lines = rawText.split('\n').map(l => l.trim()).filter(Boolean);
-    const titleCandidate = lines[0]?.replace(/^[#\-* ]+/, '') || 'Synthesized Thought Note';
-    
-    // Extract key sentences
-    const bodyLines = lines.slice(1);
-    const keyPoints = bodyLines.length > 0 
-      ? bodyLines.slice(0, 5).map(l => `- **${l.split(':')[0] || 'Key point'}**: ${l}`).join('\n')
-      : `- **Core Observation**: ${rawText || 'Raw captured concept requiring deeper inquiry.'}`;
-
-    let structuredMd = template.skeletonMarkdown;
-    // Replace template title if possible
-    structuredMd = structuredMd.replace(/^# .+/m, `# ${titleCandidate}`);
-
-    return {
-      title: titleCandidate,
-      markdown: `${structuredMd}\n\n---\n### 📥 Raw Captures Preserved\n${keyPoints}`,
-      tags: ['second-brain', template.id, 'offline-heuristic'],
-      tokensUsed: 0,
-      providerUsed: 'Offline First-Principles Engine'
     };
   }
 }

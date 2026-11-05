@@ -19,7 +19,7 @@ export class VaultService {
     return {
       vaultPath: 'Nomess_Vault',
       gdriveFolderPath: '',
-      aiProvider: 'gemini',
+      aiProvider: 'pure-engineering',
       geminiApiKey: '',
       ollamaEndpoint: 'http://localhost:11434',
       ollamaModel: 'llama3.2',

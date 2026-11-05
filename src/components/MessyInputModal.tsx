@@ -31,6 +31,8 @@ export const MessyInputModal: React.FC<MessyInputModalProps> = ({
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [ocrStatus, setOcrStatus] = useState<string | null>(null);
+  const [ocrProgress, setOcrProgress] = useState<number>(0);
 
   if (!isOpen) return null;
 
@@ -59,13 +61,19 @@ export const MessyInputModal: React.FC<MessyInputModalProps> = ({
 
     setIsLoading(true);
     setErrorMsg(null);
+    setOcrStatus(null);
+    setOcrProgress(0);
 
     try {
       const res = await AIService.structureNote(
         rawText,
         selectedTemplate,
         config,
-        imagePreview || undefined
+        imagePreview || undefined,
+        (status, progress) => {
+          setOcrStatus(status);
+          setOcrProgress(progress);
+        }
       );
 
       onNoteCreated(res, selectedTemplate, rawText, imagePreview || undefined);
@@ -73,6 +81,7 @@ export const MessyInputModal: React.FC<MessyInputModalProps> = ({
       // Reset
       setRawText('');
       setImagePreview(null);
+      setOcrStatus(null);
     } catch (err: any) {
       setErrorMsg(err.message || 'Transformation failed. Falling back to offline engine.');
     } finally {
@@ -228,6 +237,22 @@ export const MessyInputModal: React.FC<MessyInputModalProps> = ({
             </div>
           </div>
 
+          {/* Live Progress Bar for OCR & Synthesis */}
+          {isLoading && (
+            <div className="p-3.5 rounded-xl bg-[#F4F4EE] border border-[#E6E4DC] space-y-2">
+              <div className="flex items-center justify-between text-xs font-mono text-[#45443F]">
+                <span>{ocrStatus || 'Executing Cognitive Synthesis...'}</span>
+                <span>{Math.round(ocrProgress * 100)}%</span>
+              </div>
+              <div className="w-full bg-[#EAE8E0] rounded-full h-1.5 overflow-hidden">
+                <div 
+                  className="bg-[#C84B31] h-1.5 transition-all duration-300 rounded-full"
+                  style={{ width: `${Math.max(15, ocrProgress * 100)}%` }}
+                />
+              </div>
+            </div>
+          )}
+
           {/* Error Message */}
           {errorMsg && (
             <div className="p-3 rounded-lg bg-[#C84B31]/10 border border-[#C84B31]/20 text-xs text-[#C84B31] flex items-center space-x-2">
@@ -240,7 +265,11 @@ export const MessyInputModal: React.FC<MessyInputModalProps> = ({
         {/* Modal Footer */}
         <div className="px-6 py-4 border-t border-[#E6E4DC] bg-[#F4F4EE] flex items-center justify-between">
           <div className="text-xs font-mono text-[#7E7C75]">
-            Provider: <span className="font-semibold text-[#1A1A18]">{config.geminiApiKey ? 'Gemini 1.5 Flash' : config.aiProvider === 'ollama' ? 'Ollama Local' : 'Offline Engine'}</span>
+            Engine: <span className="font-semibold text-[#1A1A18]">
+              {config.aiProvider === 'pure-engineering' || !config.geminiApiKey 
+                ? '⚡ Pure Engineering (Zero-API)' 
+                : 'Gemini Flash Cloud'}
+            </span>
           </div>
 
           <div className="flex items-center space-x-3">

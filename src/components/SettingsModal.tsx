@@ -76,7 +76,23 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               AI Intelligence Engine
             </label>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div
+                onClick={() => setFormData({ ...formData, aiProvider: 'pure-engineering' })}
+                className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                  formData.aiProvider === 'pure-engineering'
+                    ? 'border-[#C84B31] bg-[#C84B31]/5'
+                    : 'border-[#E6E4DC] bg-[#FFFFFF] hover:border-[#D8D6CD]'
+                }`}
+              >
+                <div className="flex items-center space-x-2 mb-1">
+                  <span className="font-serif text-xs font-semibold text-[#1A1A18]">⚡ Pure Engineering</span>
+                </div>
+                <p className="text-[10px] text-[#7E7C75] leading-relaxed">
+                  100% Free, Zero-API. On-device Canvas OCR + Cognitive Synthesizer.
+                </p>
+              </div>
+
               <div
                 onClick={() => setFormData({ ...formData, aiProvider: 'gemini' })}
                 className={`p-3 rounded-xl border cursor-pointer transition-all ${
@@ -86,10 +102,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 }`}
               >
                 <div className="flex items-center space-x-2 mb-1">
-                  <span className="font-serif text-sm font-medium text-[#1A1A18]">Google Gemini Flash</span>
+                  <span className="font-serif text-xs font-semibold text-[#1A1A18]">Gemini Flash Cloud</span>
                 </div>
-                <p className="text-[11px] text-[#7E7C75]">
-                  Ultra-fast, lowest token cost, vision OCR for photos of notebook pages.
+                <p className="text-[10px] text-[#7E7C75] leading-relaxed">
+                  Deep multimodal vision and reasoning via Google AI Studio API key.
                 </p>
               </div>
 
@@ -102,17 +118,24 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 }`}
               >
                 <div className="flex items-center space-x-2 mb-1">
-                  <span className="font-serif text-sm font-medium text-[#1A1A18]">Local Ollama</span>
+                  <span className="font-serif text-xs font-semibold text-[#1A1A18]">Local Ollama</span>
                 </div>
-                <p className="text-[11px] text-[#7E7C75]">
-                  100% offline air-gapped notes on your machine with zero data leaving your PC.
+                <p className="text-[10px] text-[#7E7C75] leading-relaxed">
+                  100% air-gapped local LLM (llama3.2) on your computer.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Conditional Provider Settings */}
-          {formData.aiProvider === 'gemini' ? (
+          {formData.aiProvider === 'pure-engineering' ? (
+            <div className="p-3.5 rounded-xl bg-[#E8F0EC] border border-[#C4DBD0] text-xs font-sans text-[#3C6351] space-y-1">
+              <span className="font-semibold block font-mono">⚡ Zero-API Pure Engineering Active</span>
+              <p className="text-[11px] text-[#4A6B5D] leading-relaxed">
+                Your device handles everything for free. Notes are synthesized using first-principles cognitive state machines, and phone notebook photos are transcribed with on-device Canvas WebAssembly OCR. Zero API keys, zero cloud costs.
+              </p>
+            </div>
+          ) : formData.aiProvider === 'gemini' ? (
             <div className="space-y-1.5">
               <label className="block text-xs font-medium text-[#45443F]">
                 Google Gemini API Key

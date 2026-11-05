@@ -50,7 +50,7 @@ export interface NoteTemplate {
 export interface VaultConfig {
   vaultPath: string;
   gdriveFolderPath: string;
-  aiProvider: 'gemini' | 'ollama';
+  aiProvider: 'pure-engineering' | 'gemini' | 'ollama';
   geminiApiKey: string;
   ollamaEndpoint: string;
   ollamaModel: string;
