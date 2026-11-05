@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Newsreader', 'Georgia', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    
+    --paper-base: #FBFBF9;
+    --paper-sidebar: #F4F4EE;
+    --paper-card: #FFFFFF;
+    --paper-hover: #ECECE6;
+    
+    --ink-pure: #1A1A18;
+    --ink-subtle: #45443F;
+    --ink-muted: #7E7C75;
+    --ink-faint: #B5B3AA;
+    
+    --border-hairline: #E6E4DC;
+    --border-subtle: #D8D6CD;
+    
+    --accent-bauhaus: #C84B31;
+    --accent-sage: #3C6351;
+    --accent-ochre: #C08A3E;
+    --accent-indigo: #2D4059;
+  }
+
+  body {
+    background-color: var(--paper-base);
+    color: var(--ink-pure);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Custom subtle paper scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D8D6CD;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #B5B3AA;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Precision Print Stylesheet (@media print) */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.45 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  @page {
+    margin: 18mm 18mm 20mm 18mm;
+    size: auto;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p, blockquote, pre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

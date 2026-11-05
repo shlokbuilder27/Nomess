@@ -1,93 +1,68 @@
-# 🚀 HomeworkNuke — Sovereign Study Control System
+# 📐 NOMESS — The Editorial Second Brain Desktop App
 
-> *"Action Kills Anxiety. Thinking about homework causes dread; sitting down with a focused timer destroys it. School homework is not a test of my soul; it is a clerical toll to be paid quickly and mechanically."*  
-> — **Shlok // Operating Creed**
+> *"Design is not just what it looks like and feels like. Design is how it works."* — Steve Jobs  
+> *"Never do with two chips what you can do with one."* — Steve Wozniak
 
-![HomeworkNuke Logo](assets/icons/app-icon.svg)
+**Nomess** transforms raw, fragmented, messy notes and scanned handwritten pages into museum-grade, structured **Second Brain** knowledge artifacts.
 
-**HomeworkNuke** is a native-feeling Windows desktop application designed for high-performance students and deep-tech builders preparing for board exams. It takes an overwhelming mountain of clerical homework, runs Gemini AI cognitive triage to estimate time and difficulty, sequences flexible-duration Pomodoro blocks, and eliminates friction with an addictive, tactile study experience.
-
----
-
-## 🎨 Anti-AI-Slop Design Language
-
-Strictly avoids generic corporate blue-purple gradients in favor of an organic, warm, cosmic aesthetic:
-
-| Color | Hex | Role | Application |
-|---|---|---|---|
-| **Dark Moss** | `#2D312E` | Primary Structure / Dark Surface | Canvas background in dark mode, high-contrast typography in light mode |
-| **Golden Amber** | `#D4A373` | Action & Urgency Accent | Active countdown timer ring, start buttons, high-priority flags |
-| **Pale Sage** | `#E9EDC9` | Container Backgrounds | Mission cards, passive navigation bars |
-| **Swiss Cream** | `#FEFAE0` | Main Surface (Light Mode) | Clean background surface, astronaut suit highlights |
-| **Muted Slate** | `#CCD5AE` | Secondary Accents | Break mode ring, completed state strikethroughs |
-
-### 🖋 Typography
-- **Headings, Timers & Telemetry:** `Space Grotesk` (Variable Font)
-- **Body & Mission Descriptions:** `Cagliostro` (Clean, human, readable)
+Built from first principles as a **native desktop application** (Tauri v2 + Rust) without running any bloated background localhost servers.
 
 ---
 
-## ⚡ Core Systems & Capabilities
-
-### 1. 📋 Mission Queue Triage
-- Quick entry with subject chips: **Mathematics, Science, English, Gujarati, Computer Studies, Social Science**.
-- Cognitive task categories: *Problem-Solving*, *Written*, *Memorization*, *Reading*.
-- Priority overrides (`★ HIGH PRIORITY`) and due-date tracking.
-- Visual left-strip Golden Amber indicator for urgent assignments.
-
-### 2. 📅 AI Strategic Study Blueprint
-- Powered by **Google Gemini API** (`@google/genai`) with zero-latency heuristic offline fallback.
-- Dynamically allocates flexible block lengths (e.g. 45m deep focus for Maths/Physics, 20m high-intensity sprint for revision).
-- Interleaves heavy analytical blocks with lighter reading to prevent burnout.
-- Drag-and-drop interactive timeline reordering.
-- Direct **"LOAD IN TIMER"** button to jump straight into action.
-
-### 3. ⏱ Sovereign Pomodoro Focus Engine
-- High-precision SVG circular countdown progress ring.
-- Harmonic Web Audio API synthesizer chimes upon completion (no audio file dependencies).
-- Mode transitions: **Golden Amber** for Deep Work $\to$ **Muted Slate** for Tactical Rest Breaks.
-- Global and local keyboard bindings:
-  - `Spacebar` $\to$ Start / Pause Timer.
-  - `Enter` $\to$ Mark current mission complete.
-  - `Ctrl + Shift + H` $\to$ Toggle window visibility from anywhere.
-  - `Ctrl + Shift + N` $\to$ Global Quick-Add Mission.
-
-### 4. 💣 The Tactical NUKE Action
-- Instantly identifies and eliminates all low-hanging, easy clerical homework (≤ 20 mins, normal priority).
-- Triggers a tactical screen shockwave (`.shake-nuke`), deep sub-bass blast, and massive confetti burst.
-
-### 5. 📸 Vision OCR Homework Ingestion
-- Drag-and-drop or snap a photo of a textbook exercise, handwritten diary, or syllabus portion.
-- Gemini Multimodal Vision automatically parses individual exercises and question ranges into structured tasks.
-
-### 6. 📊 Daily Productivity Radar
-- Telemetry tracking: consecutive sovereign streak days, missions eliminated, tasks nuked, and total deep focus minutes logged.
+## 🏛️ The Dieter Rams / Editorial Bauhaus Design System
+- **Archival Paper Canvas**: `#FBFBF9` 120gsm laid-cotton texture with hairline blind debossed rules (`#E6E4DC`).
+- **Typographic Discipline**: Classical optical pairing (`Newsreader` serif for editorial presence, `Inter` for Swiss grotesque legibility, `JetBrains Mono` for code and YAML).
+- **Zero Chrome Distraction**: Everything stripped down to the bare essence of the thought artifact.
 
 ---
 
-## 🛠 Tech Stack
-
-- **Platform:** Windows Desktop (Electron v34.5.8)
-- **Architecture:** TypeScript (strict CommonJS build), HTML5, CSS3, Web Audio API, Canvas
-- **AI Engine:** Google Gemini API (`gemini-3.8-flash` / `gemini-flash-latest`)
-- **Storage:** Local atomic JSON database (`data/homeworknuke-db.json`)
-- **Branding:** Custom 2D Space Astronaut vector icon
+## 🧠 The 10 Curated Second-Brain Templates
+1. **Cornell Study System**: Dual-column active recall with synthesis anchor.
+2. **Feynman First-Principles**: Explain like I'm five, expose knowledge gaps, first-principles rebuild.
+3. **Executive Decisional Memo**: Context, Problem, Evaluated Options with explicit trade-offs, Irreversible vs Reversible classification.
+4. **Zettelkasten Atomic Note**: Single concept thesis, interconnected `[[wiki-links]]`, reference source, and evergreen tags.
+5. **First-Principles Architecture Spec**: System invariants, memory/latency budgets, component topology, and failure modes.
+6. **Meeting & Action Cluster**: Resolves rambling discussion into finalized decisions and individual action items.
+7. **Stoic Daily Reflection**: Marcus Aurelius format: Dichotomy of control, obstacle inversion (*Amor Fati*), evening postmortem.
+8. **Book & Podcast Digest**: Strips filler stories into 3 load-bearing insights, memorable verbatim quotes, and behavioral changes.
+9. **Precision SOP Checklist**: Gawande-style flight checklist with non-negotiable sequence and abort conditions.
+10. **Founder Pitch Memo**: Peter Thiel / Steve Jobs thesis: The Secret Insight, status quo pain, unfair advantage, and compounding flywheel.
 
 ---
 
-## 🚀 Quick Launch
+## ⚡ Native First-Principles Architecture
+- **Desktop Runtime**: Tauri v2 + Rust OS Native WebView2 (Zero localhost server, sub-15MB installer, sub-35MB RAM).
+- **Vault Contract**: Local-first UTF-8 `.md` files with RFC-822 / YAML frontmatter (`Nomess_Vault/*.md`). 100% interoperable with Obsidian, Git, or File Explorer.
+- **Google Drive Sync**: Mirrors notes directly into your local Google Drive folder for instant mobile synchronization without proprietary cloud lock-in.
+- **Token-Frugal AI Engine**: Strict single-shot JSON structured ingest using Google Gemini 1.5/2.0 Flash (with multimodal OCR for photos of physical notebooks) or local Ollama for 100% offline air-gapped notes.
 
-### Option 1: 1-Click Batch Launcher
-Double-click `launch-app.bat` in this directory.
+---
 
-### Option 2: Command Line
+## 🚀 Development & Build
+
+### Running in Development
 ```bash
-# In F:\DEV\homeworknuke
-npm start
-# or
+# Install dependencies
+npm install
+
+# Run native desktop app in dev mode
+npx tauri dev
+
+# Or run frontend interface preview
 npm run dev
 ```
 
+### Compiling Production Native Desktop Binary
+```bash
+npm run build
+npx tauri build
+```
+The compiled Windows `.exe` installer will be located in:
+`src-tauri/target/release/bundle/msi/` or `nsis/`.
+
 ---
 
-*Built with precision during Vibe Session #1. Anti-AI-Slop. 100% Sovereign.*
+## ⌨️ Keyboard Shortcuts
+- `Ctrl + N`: Restructure New Messy Note (Brain Dump or Photo Scan)
+- `Ctrl + P`: Precision Editorial Print & Vector PDF Export
+- `Ctrl + S`: Save active note to local vault and Google Drive mirror
