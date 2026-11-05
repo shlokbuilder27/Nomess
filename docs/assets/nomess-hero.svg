@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,wght@0,400;0,600;1,400&amp;display=swap');
+      .sans { font-family: 'Inter', -apple-system, sans-serif; }
+      .serif { font-family: 'Newsreader', Georgia, serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#1A1A18" flood-opacity="0.12"/>
+    </filter>
+    <filter id="card-shadow" x="-3%" y="-3%" width="106%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1A1A18" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="680" fill="#ECECE6" />
+
+  <!-- App Window Container -->
+  <g filter="url(#shadow)" transform="translate(30, 25)">
+    <!-- Window Frame -->
+    <rect width="1140" height="630" rx="12" fill="#FBFBF9" stroke="#D8D6CD" stroke-width="1" />
+
+    <!-- Window Top Header -->
+    <rect width="1140" height="48" rx="12" fill="#F4F4EE" />
+    <rect y="36" width="1140" height="12" fill="#F4F4EE" />
+    <line x1="0" y1="48" x2="1140" y2="48" stroke="#E6E4DC" stroke-width="1" />
+
+    <!-- Window Controls (Subtle) -->
+    <circle cx="24" cy="24" r="5" fill="#E26D5C" />
+    <circle cx="40" cy="24" r="5" fill="#E8B04F" />
+    <circle cx="56" cy="24" r="5" fill="#5FAD56" />
+
+    <!-- Brand Wordmark -->
+    <text x="84" y="30" class="serif" font-style="italic" font-weight="600" font-size="18" fill="#1A1A18">Nomess</text>
+    <rect x="156" y="16" width="46" height="18" rx="3" fill="#1A1A18" />
+    <text x="162" y="29" class="mono" font-size="9" font-weight="600" fill="#FBFBF9" letter-spacing="1">BRAIN</text>
+
+    <!-- Vault Indicator -->
+    <line x1="216" y1="18" x2="216" y2="30" stroke="#D8D6CD" stroke-width="1" />
+    <text x="230" y="28" class="mono" font-size="11" fill="#7E7C75">Nomess_Vault</text>
+    <text x="320" y="28" class="mono" font-size="11" fill="#B5B3AA">(12 notes)</text>
+
+    <!-- GDrive Badge -->
+    <rect x="400" y="15" width="105" height="20" rx="10" fill="#E8F0EC" stroke="#C4DBD0" stroke-width="0.5" />
+    <circle cx="412" cy="25" r="3" fill="#3C6351" />
+    <text x="422" y="29" class="mono" font-size="10" font-weight="500" fill="#3C6351">GDrive Synced</text>
+
+    <!-- Header Right Action Suite -->
+    <rect x="740" y="14" width="110" height="22" rx="4" fill="#EAE8E0" />
+    <text x="750" y="29" class="mono" font-size="10" fill="#7E7C75">⚡ 142 tokens used</text>
+
+    <rect x="862" y="14" width="80" height="22" rx="4" fill="#EAE8E0" />
+    <text x="876" y="29" class="sans" font-size="11" font-weight="500" fill="#45443F">Templates</text>
+
+    <rect x="952" y="14" width="85" height="22" rx="4" fill="#EAE8E0" />
+    <text x="965" y="29" class="sans" font-size="11" font-weight="500" fill="#45443F">Print &amp; Share</text>
+
+    <rect x="1046" y="13" width="76" height="24" rx="5" fill="#C84B31" />
+    <text x="1056" y="29" class="sans" font-size="11" font-weight="600" fill="#FFFFFF">+ New Note</text>
+
+    <!-- Left Sidebar Column -->
+    <g transform="translate(0, 48)">
+      <rect width="260" height="582" fill="#F4F4EE" />
+      <line x1="260" y1="0" x2="260" y2="582" stroke="#E6E4DC" stroke-width="1" />
+
+      <!-- Search Input -->
+      <rect x="14" y="12" width="232" height="28" rx="5" fill="#EAE8E0" />
+      <text x="26" y="30" class="sans" font-size="11" fill="#7E7C75">🔍 Search second-brain notes...</text>
+
+      <!-- Category Filter Pills -->
+      <g transform="translate(14, 48)">
+        <rect x="0" y="0" width="32" height="18" rx="9" fill="#1A1A18" />
+        <text x="9" y="13" class="sans" font-size="9" font-weight="600" fill="#FFFFFF">All</text>
+
+        <rect x="36" y="0" width="54" height="18" rx="9" fill="#EAE8E0" />
+        <text x="44" y="13" class="sans" font-size="9" fill="#7E7C75">Learning</text>
+
+        <rect x="94" y="0" width="54" height="18" rx="9" fill="#EAE8E0" />
+        <text x="102" y="13" class="sans" font-size="9" fill="#7E7C75">Thinking</text>
+
+        <rect x="152" y="0" width="58" height="18" rx="9" fill="#EAE8E0" />
+        <text x="160" y="13" class="sans" font-size="9" fill="#7E7C75">Execution</text>
+      </g>
+
+      <!-- Note Item 1 (Active) -->
+      <g transform="translate(10, 78)">
+        <rect width="240" height="84" rx="8" fill="#FFFFFF" stroke="#D8D6CD" stroke-width="1" filter="url(#card-shadow)" />
+        <rect x="10" y="10" width="70" height="14" rx="3" fill="#E8F0EC" />
+        <text x="14" y="21" class="mono" font-size="8" font-weight="600" fill="#3C6351">CORNELL</text>
+        <text x="195" y="21" class="mono" font-size="9" fill="#B5B3AA">Nov 05</text>
+        
+        <text x="10" y="42" class="serif" font-weight="600" font-size="13" fill="#1A1A18">Distributed Consensus: Paxos...</text>
+        <text x="10" y="58" class="sans" font-size="10" fill="#7E7C75">Mechanisms for achieving deterministic...</text>
+        
+        <text x="10" y="74" class="mono" font-size="9" fill="#C84B31">#distributed #raft</text>
+      </g>
+
+      <!-- Note Item 2 -->
+      <g transform="translate(10, 170)">
+        <rect width="240" height="80" rx="8" fill="transparent" stroke="#E6E4DC" stroke-width="0.5" />
+        <rect x="10" y="10" width="74" height="14" rx="3" fill="#F4F4EE" />
+        <text x="14" y="21" class="mono" font-size="8" font-weight="600" fill="#7E7C75">ARCH SPEC</text>
+        <text x="195" y="21" class="mono" font-size="9" fill="#B5B3AA">Nov 05</text>
+        
+        <text x="10" y="42" class="serif" font-weight="500" font-size="13" fill="#45443F">Nomess Local Vault Storage...</text>
+        <text x="10" y="58" class="sans" font-size="10" fill="#7E7C75">Pure UTF-8 .md with RFC-822 YAML...</text>
+        
+        <text x="10" y="72" class="mono" font-size="9" fill="#B5B3AA">#carmack #rust</text>
+      </g>
+
+      <!-- Note Item 3 -->
+      <g transform="translate(10, 258)">
+        <rect width="240" height="80" rx="8" fill="transparent" stroke="#E6E4DC" stroke-width="0.5" />
+        <rect x="10" y="10" width="80" height="14" rx="3" fill="#F4F4EE" />
+        <text x="14" y="21" class="mono" font-size="8" font-weight="600" fill="#7E7C75">EXEC MEMO</text>
+        <text x="195" y="21" class="mono" font-size="9" fill="#B5B3AA">Nov 04</text>
+        
+        <text x="10" y="42" class="serif" font-weight="500" font-size="13" fill="#45443F">Native Architecture for Nomess</text>
+        <text x="10" y="58" class="sans" font-size="10" fill="#7E7C75">Tauri v2 eliminates 200MB background...</text>
+      </g>
+    </g>
+
+    <!-- Main Editorial Reading Canvas -->
+    <g transform="translate(260, 48)">
+      <!-- Canvas Backdrop -->
+      <rect width="880" height="582" fill="#ECECE6" />
+
+      <!-- Center Archival Paper Sheet -->
+      <g transform="translate(45, 20)">
+        <rect width="790" height="540" rx="8" fill="#FBFBF9" stroke="#D8D6CD" stroke-width="1" filter="url(#shadow)" />
+
+        <!-- Top Sheet Meta Header -->
+        <text x="40" y="44" class="mono" font-size="10" font-weight="600" fill="#7E7C75" letter-spacing="1">CORNELL STUDY SYSTEM / NOVEMBER 5, 2026</text>
+        
+        <!-- Document Title -->
+        <text x="40" y="82" class="serif" font-size="28" font-weight="400" fill="#1A1A18">Distributed Consensus: Paxos vs Raft</text>
+
+        <!-- Tags -->
+        <g transform="translate(40, 96)">
+          <rect x="0" y="0" width="70" height="18" rx="3" fill="#EAE8E0" />
+          <text x="8" y="13" class="mono" font-size="9" fill="#45443F">#consensus</text>
+
+          <rect x="76" y="0" width="124" height="18" rx="3" fill="#EAE8E0" />
+          <text x="84" y="13" class="mono" font-size="9" fill="#45443F">#distributed-systems</text>
+
+          <rect x="206" y="0" width="46" height="18" rx="3" fill="#EAE8E0" />
+          <text x="214" y="13" class="mono" font-size="9" fill="#45443F">#raft</text>
+        </g>
+
+        <!-- Divider Line -->
+        <line x1="40" y1="126" x2="750" y2="126" stroke="#E6E4DC" stroke-width="1" />
+
+        <!-- Core Subject Callout Box (Jobs Style) -->
+        <rect x="40" y="140" width="710" height="38" rx="4" fill="#F4F4EE" stroke="#E6E4DC" stroke-width="0.5" />
+        <rect x="40" y="140" width="4" height="38" fill="#C84B31" />
+        <text x="56" y="163" class="sans" font-size="12" fill="#45443F">
+          <tspan font-weight="600" fill="#1A1A18">Core Subject &amp; Scope:</tspan> Mechanisms for achieving state machine consensus across untrusted asynchronous networks.
+        </text>
+
+        <!-- Cornell Split Column Layout -->
+        <!-- Left Cues (35%) -->
+        <g transform="translate(40, 196)">
+          <text x="0" y="16" class="serif" font-size="15" font-weight="600" fill="#1A1A18">Recall Cues</text>
+          <line x1="0" y1="24" x2="210" y2="24" stroke="#E6E4DC" stroke-width="1" />
+          
+          <text x="0" y="44" class="sans" font-size="11" font-weight="600" fill="#45443F">• Why consensus?</text>
+          <text x="0" y="58" class="sans" font-size="10" fill="#7E7C75">Ordering without global clock</text>
+
+          <text x="0" y="86" class="sans" font-size="11" font-weight="600" fill="#45443F">• Paxos vs Raft</text>
+          <text x="0" y="100" class="sans" font-size="10" fill="#7E7C75">Cognitive ergonomics difference</text>
+
+          <text x="0" y="128" class="sans" font-size="11" font-weight="600" fill="#45443F">• Split-Vote Timeout</text>
+          <text x="0" y="142" class="sans" font-size="10" fill="#7E7C75">150-300ms jittered heartbeats</text>
+        </g>
+
+        <!-- Vertical Divider -->
+        <line x1="280" y1="196" x2="280" y2="400" stroke="#E6E4DC" stroke-width="1" />
+
+        <!-- Right Synthesized Notes (65%) -->
+        <g transform="translate(305, 196)">
+          <text x="0" y="16" class="serif" font-size="15" font-weight="600" fill="#1A1A18">Synthesized Notes &amp; Principles</text>
+          <line x1="0" y1="24" x2="445" y2="24" stroke="#E6E4DC" stroke-width="1" />
+
+          <text x="0" y="46" class="sans" font-size="12" fill="#1A1A18">
+            <tspan font-weight="600">• Objective:</tspan> Replicated state machine safety—every honest node executes commands
+          </text>
+          <text x="10" y="62" class="sans" font-size="12" fill="#1A1A18">in the identical deterministic sequence.</text>
+
+          <text x="0" y="90" class="sans" font-size="12" font-weight="600" fill="#1A1A18">• Three Decomposed Invariants:</text>
+          <text x="14" y="108" class="sans" font-size="11" fill="#45443F">1. <tspan font-weight="600">Leader Election</tspan>: Heartbeat suppression with randomized countdown.</text>
+          <text x="14" y="126" class="sans" font-size="11" fill="#45443F">2. <tspan font-weight="600">Log Replication</tspan>: Two-phase commit controlled by the single recognized leader.</text>
+          <text x="14" y="144" class="sans" font-size="11" fill="#45443F">3. <tspan font-weight="600">Term Monotonicity</tspan>: Stale leaders instantly step down upon seeing higher terms.</text>
+
+          <!-- Code Snippet -->
+          <rect x="0" y="160" width="445" height="38" rx="4" fill="#1A1A18" />
+          <text x="14" y="184" class="mono" font-size="10" fill="#FBFBF9">struct LogEntry { term: u64, index: u64, cmd: Vec&lt;u8&gt; }</text>
+        </g>
+
+        <!-- Bottom Synthesis Anchor (Full Width) -->
+        <g transform="translate(40, 420)">
+          <rect width="710" height="60" rx="4" fill="#F4F4EE" stroke="#E6E4DC" stroke-width="0.5" />
+          <text x="16" y="22" class="serif" font-style="italic" font-weight="600" font-size="13" fill="#1A1A18">Synthesis Anchor:</text>
+          <text x="16" y="42" class="sans" font-size="11" fill="#45443F">
+            Raft decomposes consensus into isolated leader election, log broadcast, and state safety. By making election deterministic
+          </text>
+          <text x="16" y="54" class="sans" font-size="11" fill="#45443F">
+            through randomized timeouts, it achieves equivalent mathematical safety to Paxos while eliminating state ambiguity.
+          </text>
+        </g>
+
+        <!-- Footer Page Marker -->
+        <text x="40" y="515" class="mono" font-size="9" fill="#B5B3AA">NOMESS ARCHIVAL VAULT • 120GSM LAID COTTON</text>
+        <text x="690" y="515" class="mono" font-size="9" fill="#B5B3AA">PAGE 1 OF 1</text>
+      </g>
+    </g>
+  </g>
+</svg>
