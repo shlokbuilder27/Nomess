@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,wght@0,400;0,600;1,400&amp;display=swap');
-      .sans { font-family: 'Inter', -apple-system, sans-serif; }
-      .serif { font-family: 'Newsreader', Georgia, serif; }
-      .mono { font-family: 'JetBrains Mono', monospace; }
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .serif { font-family: "Newsreader", Georgia, "Times New Roman", serif; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace; }
     </style>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
       <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#1A1A18" flood-opacity="0.12"/>

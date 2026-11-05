@@ -33,6 +33,39 @@ Built from first principles as a **native desktop application** (Tauri v2 + Rust
   <img src="docs/assets/architecture-diagram.svg" alt="Nomess System Architecture Flowchart" width="100%" />
 </p>
 
+```mermaid
+flowchart LR
+    subgraph Ingest ["1. Ingestion"]
+        A[Raw Braindump Text]
+        B[Phone Camera Scan / OCR]
+        C[10 Cognitive Templates]
+    end
+
+    subgraph Intelligence ["2. Synthesis Engines"]
+        D[Pure-Engineering AST Engine<br/>0ms, 0 Tokens, 100% Free]
+        E[On-Device Wasm OCR<br/>Tesseract Canvas Shader]
+        F[Optional Gemini Flash Cloud]
+    end
+
+    subgraph NativeCore ["3. Tauri v2 Desktop Engine"]
+        G[Direct WebView2 Window<br/>Zero Localhost Server]
+        H[Atomic File Dispatcher]
+        I[Dieter Rams Bauhaus Canvas]
+    end
+
+    subgraph Storage ["4. Persist & Sync"]
+        J[Local Markdown Vault<br/>Obsidian Compatible]
+        K[Google Drive Mobile Mirror<br/>Auto-Synced to Phone]
+        L[Editorial Print Suite<br/>A4 Vector PDF]
+    end
+
+    A & C --> D
+    B --> E --> D
+    D -.-> F
+    D --> NativeCore
+    NativeCore --> J & K & L
+```
+
 ---
 
 ## 🎨 The Dieter Rams / Editorial Bauhaus Design System

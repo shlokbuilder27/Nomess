@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" width="100%" height="100%">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,wght@0,600&amp;display=swap');
-      .sans { font-family: 'Inter', -apple-system, sans-serif; }
-      .serif { font-family: 'Newsreader', Georgia, serif; }
-      .mono { font-family: 'JetBrains Mono', monospace; }
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .serif { font-family: "Newsreader", Georgia, "Times New Roman", serif; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace; }
     </style>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1A1A18" flood-opacity="0.08"/>
@@ -15,7 +14,7 @@
 
   <!-- Diagram Title -->
   <text x="50" y="45" class="serif" font-size="22" font-weight="600" fill="#1A1A18">Nomess First-Principles System Architecture</text>
-  <text x="50" y="65" class="mono" font-size="11" fill="#7E7C75">ZERO-LOCALHOST TAURI V2 + RUST ENGINE &bull; LOCAL-FIRST MARKDOWN VAULT</text>
+  <text x="50" y="65" class="mono" font-size="11" fill="#7E7C75">ZERO-LOCALHOST TAURI V2 + RUST ENGINE &#8226; LOCAL-FIRST MARKDOWN VAULT</text>
 
   <!-- Flow Columns -->
   <!-- 1. Input Modalities -->
@@ -59,18 +58,18 @@
     <!-- Engine A -->
     <rect x="12" y="44" width="156" height="96" rx="6" fill="#FBFBF9" stroke="#E6E4DC" />
     <text x="22" y="66" class="sans" font-size="11" font-weight="600" fill="#1A1A18">Gemini Flash (Vision)</text>
-    <text x="22" y="80" class="sans" font-size="9" fill="#7E7C75">&bull; Strict single-shot JSON</text>
-    <text x="22" y="94" class="sans" font-size="9" fill="#7E7C75">&bull; Multimodal vision OCR</text>
-    <text x="22" y="108" class="sans" font-size="9" fill="#7E7C75">&bull; Sub-150 token budget</text>
+    <text x="22" y="80" class="sans" font-size="9" fill="#7E7C75">&#8226; Strict single-shot JSON</text>
+    <text x="22" y="94" class="sans" font-size="9" fill="#7E7C75">&#8226; Multimodal vision OCR</text>
+    <text x="22" y="108" class="sans" font-size="9" fill="#7E7C75">&#8226; Sub-150 token budget</text>
     <text x="22" y="122" class="mono" font-size="8" fill="#3C6351">Ultra-low token spend</text>
 
     <!-- Engine B -->
     <rect x="12" y="152" width="156" height="110" rx="6" fill="#FBFBF9" stroke="#E6E4DC" />
     <text x="22" y="174" class="sans" font-size="11" font-weight="600" fill="#1A1A18">Local Air-Gapped Mode</text>
-    <text x="22" y="188" class="sans" font-size="9" fill="#7E7C75">&bull; Local Ollama (llama3.2)</text>
-    <text x="22" y="202" class="sans" font-size="9" fill="#7E7C75">&bull; 100% offline privacy</text>
-    <text x="22" y="216" class="sans" font-size="9" fill="#7E7C75">&bull; Zero packets sent</text>
-    <text x="22" y="234" class="sans" font-size="9" fill="#7E7C75">&bull; Offline heuristic fill</text>
+    <text x="22" y="188" class="sans" font-size="9" fill="#7E7C75">&#8226; Local Ollama (llama3.2)</text>
+    <text x="22" y="202" class="sans" font-size="9" fill="#7E7C75">&#8226; 100% offline privacy</text>
+    <text x="22" y="216" class="sans" font-size="9" fill="#7E7C75">&#8226; Zero packets sent</text>
+    <text x="22" y="234" class="sans" font-size="9" fill="#7E7C75">&#8226; Offline heuristic fill</text>
     <text x="22" y="248" class="mono" font-size="8" fill="#C84B31">Zero-cost fallback</text>
   </g>
 
@@ -96,9 +95,9 @@
 
     <rect x="12" y="172" width="166" height="90" rx="6" fill="#FBFBF9" stroke="#E6E4DC" />
     <text x="22" y="194" class="sans" font-size="11" font-weight="600" fill="#1A1A18">Dieter Rams Canvas</text>
-    <text x="22" y="208" class="sans" font-size="9" fill="#7E7C75">&bull; Newsreader serif</text>
-    <text x="22" y="222" class="sans" font-size="9" fill="#7E7C75">&bull; Inter Swiss grotesque</text>
-    <text x="22" y="236" class="sans" font-size="9" fill="#7E7C75">&bull; Archival laid cotton tint</text>
+    <text x="22" y="208" class="sans" font-size="9" fill="#7E7C75">&#8226; Newsreader serif</text>
+    <text x="22" y="222" class="sans" font-size="9" fill="#7E7C75">&#8226; Inter Swiss grotesque</text>
+    <text x="22" y="236" class="sans" font-size="9" fill="#7E7C75">&#8226; Archival laid cotton tint</text>
     <text x="22" y="250" class="mono" font-size="8" fill="#1A1A18">#FBFBF9 Canvas</text>
   </g>
 
