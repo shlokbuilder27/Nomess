@@ -1,0 +1,16 @@
+{
+  "name": "Nomess — Editorial Second Brain",
+  "short_name": "Nomess",
+  "description": "Transform messy notes and handwritten notebook scans into beautiful second brain artifacts.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FBFBF9",
+  "theme_color": "#1A1A18",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
